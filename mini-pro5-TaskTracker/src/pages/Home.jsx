@@ -5,7 +5,7 @@ import TaskList from "../components/TaskList";
 
 const Home = () => {
   return (
-    <div className="container">
+    <div className="app-container">
       <Header />
       <TaskInput />
       <TaskList />

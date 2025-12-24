@@ -1,25 +1,21 @@
-import React, { useContext } from "react";
+// src/components/TaskItem.jsx
+import { useContext } from "react";
 import { TaskContext } from "../store/taskContext";
 
 const TaskItem = ({ task }) => {
-  const { tasks, setTasks } = useContext(TaskContext);
-
-  const toggleComplete = () => {
-    const updated = tasks.map((t) =>
-      t.id === task.id ? { ...t, completed: !t.completed } : t
-    );
-    setTasks(updated);
-  };
-
-  const deleteTask = () => {
-    setTasks(tasks.filter((t) => t.id !== task.id));
-  };
+  const { toggleTask, deleteTask } = useContext(TaskContext);
 
   return (
-    <li className={task.completed ? "task-item completed" : "task-item"}>
-      <input type="checkbox" checked={task.completed} onChange={toggleComplete} />
+    <li className={`task-item ${task.completed ? "completed" : ""}`}>
+      <input
+        type="checkbox"
+        checked={task.completed}
+        onChange={() => toggleTask(task.id)}
+      />
+
       <span>{task.text}</span>
-      <button onClick={deleteTask}>Delete</button>
+
+      <button onClick={() => deleteTask(task.id)}>Delete</button>
     </li>
   );
 };
